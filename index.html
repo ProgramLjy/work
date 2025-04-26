@@ -1,49 +1,95 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <title>林家洋个人作品</title>
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
+
 <body>
     <div id="app" style="width: 1280px;margin: auto;">
         <el-container>
             <el-header>
-                <div>
-                    <el-image style="width: 30px; height: 30px;" src="./image/github-mark.png"></el-image>
-                    <span style="font-size: small;">林家洋个人作品</span>     
-                </div>
+                <el-menu class="el-menu-demo" mode="horizontal">
+                    <el-menu-item> <el-image style="width: 30px; height: 30px;"
+                            src="./images/github-mark.png"></el-image>
+                        <span>林家洋个人作品</span></el-menu-item>
+                    <el-menu-item style="float: right;">关于</el-menu-item>
+                    <el-menu-item style="float: right;">收藏</el-menu-item>
+                    <el-menu-item style="float: right;">分类</el-menu-item>
+                    <el-menu-item style="float: right;">首页</el-menu-item>
+                    <el-menu-item style="float: right;"> <el-input placeholder="请输入内容">
+                            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                        </el-input></el-menu-item>
+
+                </el-menu>
             </el-header>
             <el-container>
                 <el-aside width="200px">
-                    <el-menu default-active="0" class="el-menu-vertical-demo" @select="handleSelect">
-                        <el-menu-item v-for="(item, index) in players" :key=index :index="index + ''" :disabled=item.disabled >
+                    <el-menu default-active="0" class="el-menu-vertical-demo" @select="handleSelect"
+                        style="height: 82%; margin-top: 20px;">
+                        <el-menu-item v-for="(item, index) in players" :key=index :index="index + ''"
+                            :disabled=item.disabled>
                             <i class="el-icon-video-camera"></i>
                             <span slot="title">{{item.title}}</span>
                         </el-menu-item>
                     </el-menu>
+                    <el-divider></el-divider>
+                    <el-row>
+                        <el-col :span="6"><el-avatar src="images/avatar.jpg"></el-avatar></el-col>
+                        <el-col :span="18">
+                            <div style="font-size: small; margin-top: 3px;"><b>ProgramLjy</b></div>
+                            <div style="font-size: xx-small; color: #a1a1a1; margin-top: 5px;">1730268341@qq.com</div>
+                        </el-col>
+                    </el-row>
                 </el-aside>
                 <el-container>
                     <el-main>
-                        <el-card class="box-card" shadow="hover">
-                            <div slot="header" class="clearfix">
-                                <span style="font-size: medium;"><b>{{players[selectIndex].title}}</span>
-                            </div>
+                        <el-card class="box-card" shadow="never">
+
+                            <span style="font-size: x-large;">{{players[selectIndex].title}}</span>
+                            <el-row style="margin-top: 10px;">
+                                <el-col :span="3">
+                                    <i class="el-icon-date"></i>
+                                    <span style="font-size: xx-small; color: #a1a1a1;">1970-01-01</span>
+                                </el-col>
+                                <el-col :span="3">
+                                    <i class="el-icon-view"></i>
+                                    <span style="font-size: xx-small; color: #a1a1a1;">12,345 次观看</span>
+                                </el-col>
+                                <el-col :span="6">
+                                    <i class="el-icon-warning-outline"></i>
+                                    <span style="font-size: xx-small; color: #a1a1a1;">未经作者授权，禁止转载</span>
+                                </el-col>
+                                <el-col :span="9"></el-col>
+                            </el-row>
+                            <el-divider></el-divider>
                             <div class="relative rounded-xl overflow-hidden shadow-2xl mb-8 animate-slide-up">
                                 <div id="player"></div>
                             </div>
+                            <el-divider></el-divider>
+                            <el-rate :value=players[selectIndex].rate disabled show-score text-color="#ff9900"
+                                score-template="{value}" style="float: right;">
+                            </el-rate>
+                            <div><b>视频介绍</b></div>
+                            <div style="font-size: small; color: #a1a1a1; margin-top: 10px;">
+                                {{players[selectIndex].description}}</div>
                         </el-card>
                     </el-main>
                 </el-container>
             </el-container>
             <el-footer>
-                <el-divider>© 2025 ProgramLjy</el-divider>
+                <el-divider>
+                    <div style="font-size: xx-small; color: #a1a1a1; margin-top: 5px;">Cpoyright &copy; 2025 ProgramLjy
+                    </div>
+                </el-divider>
             </el-footer>
         </el-container>
     </div>
 </body>
-<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/index.js"></script>
 <script>
     var vue = new Vue({
         el: '#app',
@@ -51,11 +97,11 @@
             return {
                 selectIndex: 0,
                 players: [
-                    {title: "多线程通信", disabled: false, id: "405e91a5c29f4fdb"},
-                    {title: "买量群集", disabled: true, id: null},
-                    {title: "智慧城市", disabled: false, id: "66a6555f95e61916"},
-                    {title: "汽车展示", disabled: false, id: "ae0e461fbbf7a3fa"},
-                    {title: "多人联网游戏", disabled: false, id: "e84f2060d0488757"},
+                    { title: "多线程通信", disabled: false, id: "405e91a5c29f4fdb", description: "这个人很懒，什么都没留下。", rate: 3.2 },
+                    { title: "买量群集", disabled: true, id: null, description: "这个人很懒，什么都没留下。", rate: 3.1 },
+                    { title: "智慧城市", disabled: false, id: "66a6555f95e61916", description: "这个人很懒，什么都没留下。", rate: 3.7 },
+                    { title: "汽车展示", disabled: false, id: "ae0e461fbbf7a3fa", description: "这个人很懒，什么都没留下。", rate: 5.0 },
+                    { title: "多人联网游戏", disabled: false, id: "e84f2060d0488757", description: "这个人很懒，什么都没留下。", rate: 4.5 },
                 ]
             };
         },
@@ -69,12 +115,14 @@
                     autoPlay: true
                 });
             },
+        },
+        mounted() {
         }
     })
 </script>
 <script type="text/javascript" src="https://player.dogecloud.com/js/loader"></script>
 <script type="text/javascript">
-   vue.handleSelect(0);
+    vue.handleSelect(0);
 </script>
 
 </html>
