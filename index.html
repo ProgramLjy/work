@@ -15,49 +15,50 @@
                     <el-menu-item> <el-image style="width: 30px; height: 30px;"
                             src="./images/github-mark.png"></el-image>
                         <span>林家洋个人作品</span></el-menu-item>
-                    <el-menu-item style="float: right;">关于</el-menu-item>
-                    <el-menu-item style="float: right;">收藏</el-menu-item>
-                    <el-menu-item style="float: right;">分类</el-menu-item>
-                    <el-menu-item style="float: right;">首页</el-menu-item>
-                    <el-menu-item style="float: right;"> <el-input placeholder="请输入内容">
+                    <el-menu-item style="float: right;">
+                        <el-input placeholder="Search...">
                             <i slot="prefix" class="el-input__icon el-icon-search"></i>
-                        </el-input></el-menu-item>
-
+                        </el-input>
+                    </el-menu-item>
+                    <el-menu-item style="float: right;"><el-link href="https://blog.programljy.me/" target="_blank"
+                            :underline="false">BLOG</el-link></el-menu-item>
+                    <el-menu-item style="float: right;" @click="aboutDialogVisible = true">ABOUT</el-menu-item>
+                    <el-menu-item style="float: right;"><el-link href="https://programljy.me/" target="_blank"
+                            :underline="false">HOME</el-link></el-menu-item>
                 </el-menu>
             </el-header>
             <el-container>
                 <el-aside width="200px">
                     <el-menu default-active="0" class="el-menu-vertical-demo" @select="handleSelect"
-                        style="height: 82%; margin-top: 20px;">
+                        style="height: 95%; margin-top: 20px;">
                         <el-menu-item v-for="(item, index) in players" :key=index :index="index + ''"
                             :disabled=item.disabled>
                             <i class="el-icon-video-camera"></i>
                             <span slot="title">{{item.title}}</span>
                         </el-menu-item>
                     </el-menu>
-                    <el-divider></el-divider>
+                    <!-- <el-divider></el-divider>
                     <el-row>
                         <el-col :span="6"><el-avatar src="images/avatar.jpg"></el-avatar></el-col>
                         <el-col :span="18">
                             <div style="font-size: small; margin-top: 3px;"><b>ProgramLjy</b></div>
                             <div style="font-size: xx-small; color: #a1a1a1; margin-top: 5px;">1730268341@qq.com</div>
                         </el-col>
-                    </el-row>
+                    </el-row> -->
                 </el-aside>
                 <el-container>
                     <el-main>
                         <el-card class="box-card" shadow="never">
-
                             <span style="font-size: x-large;">{{players[selectIndex].title}}</span>
                             <el-row style="margin-top: 10px;">
                                 <el-col :span="3">
                                     <i class="el-icon-date"></i>
                                     <span style="font-size: xx-small; color: #a1a1a1;">1970-01-01</span>
                                 </el-col>
-                                <el-col :span="3">
+                                <!-- <el-col :span="3">
                                     <i class="el-icon-view"></i>
                                     <span style="font-size: xx-small; color: #a1a1a1;">12,345 次观看</span>
-                                </el-col>
+                                </el-col> -->
                                 <el-col :span="6">
                                     <i class="el-icon-warning-outline"></i>
                                     <span style="font-size: xx-small; color: #a1a1a1;">未经作者授权，禁止转载</span>
@@ -69,9 +70,7 @@
                                 <div id="player"></div>
                             </div>
                             <el-divider></el-divider>
-                            <el-rate :value=players[selectIndex].rate disabled show-score text-color="#ff9900"
-                                score-template="{value}" style="float: right;">
-                            </el-rate>
+
                             <div><b>视频介绍</b></div>
                             <div style="font-size: small; color: #a1a1a1; margin-top: 10px;">
                                 {{players[selectIndex].description}}</div>
@@ -81,11 +80,23 @@
             </el-container>
             <el-footer>
                 <el-divider>
-                    <div style="font-size: xx-small; color: #a1a1a1; margin-top: 5px;">Cpoyright &copy; 2025 ProgramLjy
+                    <div style="font-size: xx-small; color: #a1a1a1; margin-top: 5px;">Cpoyright &copy; 2025.ProgramLjy
+                        All rights reserved.
                     </div>
                 </el-divider>
             </el-footer>
         </el-container>
+        <el-dialog title="About" :visible.sync="aboutDialogVisible" width="30%" >
+            <el-row>
+                <el-col :span="3"><el-avatar src="images/avatar.jpg"></el-avatar></el-col>
+                <el-col :span="21">
+                    <div style="font-size: small; margin-top: 3px;"><b>ProgramLjy</b></div>
+                    <div style="font-size: xx-small; color: #a1a1a1; margin-top: 5px;">1730268341@qq.com
+                    </div>
+                </el-col>
+            </el-row>
+        </el-dialog>
+
     </div>
 </body>
 <script src="js/vue.js"></script>
@@ -96,6 +107,7 @@
         data() {
             return {
                 selectIndex: 0,
+                aboutDialogVisible: false,
                 players: [
                     { title: "多线程通信", disabled: false, id: "405e91a5c29f4fdb", description: "这个人很懒，什么都没留下。", rate: 3.2 },
                     { title: "买量群集", disabled: true, id: null, description: "这个人很懒，什么都没留下。", rate: 3.1 },
