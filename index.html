@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>林家洋个人作品</title>
+    <link rel="icon" href="favicon.svg">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 
@@ -14,9 +15,9 @@
                 <el-menu class="el-menu-demo" mode="horizontal">
                     <el-menu-item> <el-image style="width: 30px; height: 30px;"
                             src="./images/github-mark.png"></el-image>
-                        <span>林家洋个人作品</span></el-menu-item>
+                        <span> ProgramLjy.github.io</span></el-menu-item>
                     <el-menu-item style="float: right;">
-                        <el-input placeholder="Search...">
+                        <el-input placeholder="Search..." disabled>
                             <i slot="prefix" class="el-input__icon el-icon-search"></i>
                         </el-input>
                     </el-menu-item>
@@ -32,6 +33,10 @@
                             :underline="false">HOME</el-link></el-menu-item>
                 </el-menu>
             </el-header>
+            <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-top: 20px; margin-left: 20px;">
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item>林家洋个人作品</el-breadcrumb-item>
+            </el-breadcrumb>
             <el-container>
                 <el-aside width="200px">
                     <el-menu default-active="0" class="el-menu-vertical-demo" @select="handleSelect"
@@ -55,6 +60,7 @@
                     <el-main>
                         <el-card class="box-card" shadow="never">
                             <span style="font-size: x-large;">{{players[selectIndex].title}}</span>
+
                             <el-row style="margin-top: 10px;">
                                 <el-col :span="3">
                                     <i class="el-icon-date"></i>
@@ -68,13 +74,15 @@
                                     <i class="el-icon-warning-outline"></i>
                                     <span style="font-size: xx-small; color: #a1a1a1;">未经作者授权，禁止转载</span>
                                 </el-col>
-                                <el-col :span="9"></el-col>
+                                <el-col :span="9"> </el-col>
                             </el-row>
+
                             <el-divider></el-divider>
                             <div class="relative rounded-xl overflow-hidden shadow-2xl mb-8 animate-slide-up">
                                 <div id="player"></div>
                             </div>
                             <el-divider></el-divider>
+
 
                             <div><b>视频介绍</b></div>
                             <div style="font-size: small; color: #a1a1a1; margin-top: 10px;">
